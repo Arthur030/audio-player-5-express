@@ -4,7 +4,6 @@ const app = express()
 const port = process.env.PORT || 3001
 
 
-app.listen(port, () => console.log(`Listening on port ${port}`))
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -13,7 +12,7 @@ app.use(cors({
 )
 app.use(express.json())
 
-
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
 let mysql = require('mysql')
 let connection = mysql.createConnection({
@@ -24,19 +23,19 @@ let connection = mysql.createConnection({
 })
 
 app.post("/create", (req, res) => {
-
-    const artist = req.body.artist
-    const title = req.body.title
-    const audio = req.body.audio
     
-    connection.query("INSERT INTO tracks (auth, title, src) VALUES (?, ?, ?)", [artist,title,audio], (err, result) => {
+        const artist = req.body.artist
+        const title = req.body.title
+        const audio = req.body.audio
+    
+    connection.query("INSERT INTO tracks (auth, title, src) VALUES (?, ?, ?)", [artist, title ,audio ], (err, result) => {
         if (err) {
             console.log(err)
         }
         console.log(result)
+        console.log(artist, title, audio)
     })
 })
-
 // connection.connect(function(err) {
 //     if (err) throw err
 //     console.log('Connected')
