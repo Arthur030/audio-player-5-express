@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = process.env.PORT || 3001
+// const port = process.env.PORT || 3001
 
 
 
@@ -12,7 +12,13 @@ app.use(cors({
 )
 app.use(express.json())
 
-app.listen(port, () => console.log(`Listening on port ${port}`))
+// app.listen(port, () => console.log(`Listening on port ${port}`))
+
+let server = app.listen(process.env.PORT || 3001, function () {
+    let host = server.address().address
+    let port = server.address().port
+    console.log('App listening at http://%s:%s', host, port)
+})
 
 let mysql = require('mysql')
 let connection = mysql.createConnection({
