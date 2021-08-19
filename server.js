@@ -1,8 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = process.env.PORT || 3001
-
+const server = app.listen(process.env.PORT || 3000, function () {
+const host = server.address().address
+const port = server.address().port
+console.log("App listening at http://%s:%s", host, port)
+})
 
 
 app.use(cors({
@@ -11,8 +14,6 @@ app.use(cors({
 })
 )
 app.use(express.json())
-
-app.listen(port, () => console.log(`Listening on port ${port}`))
 
 // let server = app.listen(process.env.PORT || 3001, function () {
 //     let host = server.address().address
@@ -42,18 +43,24 @@ app.post("/create", (req, res) => {
         console.log(artist, title, audio)
     })
 })
-connection.connect(function(err) {
-    if (err) throw err
-    console.log('Connected')
-    let sql = "SELECT * FROM tracks"
-    connection.query(sql, function (err, result) {
-        if (err) throw err
-        app.get('/', (req, res) => {
-            res.send(result)
-          })
-        console.log(result)
-    })
-    connection.end()
-    console.log("Disconnected")
+
+app.get('/', (req, res) => {
+    res.send('Hello')
 })
-  
+
+
+
+// connection.connect(function(err) {
+//     if (err) throw err
+//     console.log('Connected')
+//     let sql = "SELECT * FROM tracks"
+//     connection.query(sql, function (err, result) {
+//         if (err) throw err
+//         app.get('/', (req, res) => {
+//             res.send(result)
+//           })
+//         console.log(result)
+//     })
+//     connection.end()
+//     console.log("Disconnected")
+// })
