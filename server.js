@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-// const port = process.env.PORT || 3001
+const port = process.env.PORT || 3001
 
 
 
@@ -12,20 +12,20 @@ app.use(cors({
 )
 app.use(express.json())
 
-// app.listen(port, () => console.log(`Listening on port ${port}`))
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
-let server = app.listen(process.env.PORT || 3001, function () {
-    let host = server.address().address
-    let port = server.address().port
-    console.log('App listening at http://%s:%s', host, port)
-})
+// let server = app.listen(process.env.PORT || 3001, function () {
+//     let host = server.address().address
+//     let port = server.address().port
+//     console.log('App listening at http://%s:%s', host, port)
+// })
 
 let mysql = require('mysql')
 let connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'audio-player-db',
-    password: 'Sl5aPP_NaKobGxh0',
-    database: 'audio-player-db'
+    host: '696e56a5-2e65-4d25-b8a1-0525bef9b4a4.audio-playe-343.mysql.dbs.scalingo.com:31980',
+    user: 'audio_playe_343',
+    password: 'NYm35JoW7tKuBangOPxh',
+    database: 'audio_player_343'
 })
 
 app.post("/create", (req, res) => {
@@ -42,18 +42,18 @@ app.post("/create", (req, res) => {
         console.log(artist, title, audio)
     })
 })
-// connection.connect(function(err) {
-//     if (err) throw err
-//     console.log('Connected')
-//     let sql = "SELECT * FROM tracks"
-//     connection.query(sql, function (err, result) {
-//         if (err) throw err
-//         app.get('/', (req, res) => {
-//             res.send(result)
-//           })
-//         console.log(result)
-//     })
-//     connection.end()
-//     console.log("Disconnected")
-// })
+connection.connect(function(err) {
+    if (err) throw err
+    console.log('Connected')
+    let sql = "SELECT * FROM tracks"
+    connection.query(sql, function (err, result) {
+        if (err) throw err
+        app.get('/', (req, res) => {
+            res.send(result)
+          })
+        console.log(result)
+    })
+    connection.end()
+    console.log("Disconnected")
+})
   
