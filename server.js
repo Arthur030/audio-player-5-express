@@ -46,6 +46,12 @@ app.post("/create", (req, res) => {
 
 app.get('/', (req, res) => {
     res.send('Hello')
+    connection.query("SELECT * FROM tracks", (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    })
 })
 
 
