@@ -23,7 +23,7 @@ app.use(express.json())
 
 let mysql = require('mysql')
 let connection = mysql.createConnection({
-    host: '696e56a5-2e65-4d25-b8a1-0525bef9b4a4.audio-playe-343.mysql.dbs.scalingo.com:31980',
+    host: '696e56a5-2e65-4d25-b8a1-0525bef9b4a4.audio-playe-343.mysql.dbs.scalingo.com',
     user: 'audio_playe_343',
     password: 'NYm35JoW7tKuBangOPxh',
     database: 'audio_player_343'
